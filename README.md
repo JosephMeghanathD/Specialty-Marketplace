@@ -1,267 +1,68 @@
 # Specialty-Marketplace
-I'll help you start with the backend development by designing a microservice architecture using Spring Boot, Hibernate, and PostgreSQL. Let's outline the microservices and files needed for the Specialty Marketplace project.
+I'll simplify the microservice architecture for your Specialty Marketplace project. Let's focus on just two core microservices with a more straightforward structure.
 
-## Microservices Structure
-
-For your Specialty Marketplace, I recommend starting with these three core microservices:
-
-1. **User Service**: Handles authentication, authorization, and user management
-2. **Product Service**: Manages product inventory, categories, and search
-3. **Order Service**: Processes orders, payments, and shipping
-
-Let's detail each microservice and its files:
+## Simplified Microservices Structure
 
 ### 1. User Service
 
-This service will handle user registration, authentication, profile management, and admin user operations.
+Handles user authentication and profile management.
 
 **Files Structure:**
 ```
 user-service/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── specialty/
-│   │   │           └── userservice/
-│   │   │               ├── UserServiceApplication.java
-│   │   │               ├── config/
-│   │   │               │   ├── SecurityConfig.java
-│   │   │               │   └── JwtConfig.java
-│   │   │               ├── controller/
-│   │   │               │   ├── AuthController.java
-│   │   │               │   ├── UserController.java
-│   │   │               │   └── AdminUserController.java
-│   │   │               ├── dto/
-│   │   │               │   ├── LoginRequest.java
-│   │   │               │   ├── SignupRequest.java
-│   │   │               │   ├── JwtResponse.java
-│   │   │               │   └── UserProfileDto.java
-│   │   │               ├── exception/
-│   │   │               │   ├── GlobalExceptionHandler.java
-│   │   │               │   └── ResourceNotFoundException.java
-│   │   │               ├── model/
-│   │   │               │   ├── User.java
-│   │   │               │   ├── Role.java
-│   │   │               │   └── Address.java
-│   │   │               ├── repository/
-│   │   │               │   ├── UserRepository.java
-│   │   │               │   └── RoleRepository.java
-│   │   │               ├── security/
-│   │   │               │   ├── JwtTokenProvider.java
-│   │   │               │   ├── JwtAuthenticationFilter.java
-│   │   │               │   └── UserDetailsServiceImpl.java
-│   │   │               └── service/
-│   │   │                   ├── AuthService.java
-│   │   │                   ├── AuthServiceImpl.java
-│   │   │                   ├── UserService.java
-│   │   │                   └── UserServiceImpl.java
-│   │   └── resources/
-│   │       ├── application.properties
-│   │       └── db/
-│   │           └── migration/
-│   │               ├── V1__create_users_table.sql
-│   │               └── V2__create_roles_table.sql
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── specialty/
-│                   └── userservice/
-│                       ├── controller/
-│                       │   └── AuthControllerTest.java
-│                       └── service/
-│                           └── UserServiceTest.java
+├── src/main/java/com/specialty/userservice/
+│   ├── UserServiceApplication.java
+│   ├── controller/
+│   │   ├── AuthController.java
+│   │   └── UserController.java
+│   ├── model/
+│   │   ├── User.java
+│   │   └── Role.java
+│   ├── repository/
+│   │   └── UserRepository.java
+│   ├── service/
+│   │   └── UserService.java
+│   └── security/
+│       ├── JwtUtil.java
+│       └── WebSecurityConfig.java
+├── src/main/resources/
+│   └── application.properties
 └── pom.xml
 ```
 
-### 2. Product Service
+### 2. Product-Order Service
 
-This service will handle product listings, categories, inventory management, and search functionality.
+Combines product management and order processing in one service.
 
 **Files Structure:**
 ```
-product-service/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── specialty/
-│   │   │           └── productservice/
-│   │   │               ├── ProductServiceApplication.java
-│   │   │               ├── config/
-│   │   │               │   ├── ApplicationConfig.java
-│   │   │               │   └── JwtConfig.java
-│   │   │               ├── controller/
-│   │   │               │   ├── ProductController.java
-│   │   │               │   ├── CategoryController.java
-│   │   │               │   └── AdminProductController.java
-│   │   │               ├── dto/
-│   │   │               │   ├── ProductDto.java
-│   │   │               │   ├── CategoryDto.java
-│   │   │               │   └── ProductSearchRequest.java
-│   │   │               ├── exception/
-│   │   │               │   ├── GlobalExceptionHandler.java
-│   │   │               │   └── ResourceNotFoundException.java
-│   │   │               ├── model/
-│   │   │               │   ├── Product.java
-│   │   │               │   ├── Category.java
-│   │   │               │   ├── Image.java
-│   │   │               │   └── Review.java
-│   │   │               ├── repository/
-│   │   │               │   ├── ProductRepository.java
-│   │   │               │   ├── CategoryRepository.java
-│   │   │               │   └── ReviewRepository.java
-│   │   │               ├── security/
-│   │   │               │   └── JwtAuthenticationFilter.java
-│   │   │               └── service/
-│   │   │                   ├── ProductService.java
-│   │   │                   ├── ProductServiceImpl.java
-│   │   │                   ├── CategoryService.java
-│   │   │                   ├── CategoryServiceImpl.java
-│   │   │                   ├── ReviewService.java
-│   │   │                   └── ReviewServiceImpl.java
-│   │   └── resources/
-│   │       ├── application.properties
-│   │       └── db/
-│   │           └── migration/
-│   │               ├── V1__create_products_table.sql
-│   │               ├── V2__create_categories_table.sql
-│   │               └── V3__create_reviews_table.sql
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── specialty/
-│                   └── productservice/
-│                       ├── controller/
-│                       │   └── ProductControllerTest.java
-│                       └── service/
-│                           └── ProductServiceTest.java
+product-order-service/
+├── src/main/java/com/specialty/productorderservice/
+│   ├── ProductOrderServiceApplication.java
+│   ├── controller/
+│   │   ├── ProductController.java
+│   │   ├── CategoryController.java
+│   │   └── OrderController.java
+│   ├── model/
+│   │   ├── Product.java
+│   │   ├── Category.java
+│   │   ├── Order.java
+│   │   └── OrderItem.java
+│   ├── repository/
+│   │   ├── ProductRepository.java
+│   │   ├── CategoryRepository.java
+│   │   └── OrderRepository.java
+│   ├── service/
+│   │   ├── ProductService.java
+│   │   └── OrderService.java
+│   └── security/
+│       └── JwtRequestFilter.java
+├── src/main/resources/
+│   └── application.properties
 └── pom.xml
 ```
 
-### 3. Order Service
-
-This service will manage shopping carts, order processing, payment integration, and order tracking.
-
-**Files Structure:**
-```
-order-service/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── specialty/
-│   │   │           └── orderservice/
-│   │   │               ├── OrderServiceApplication.java
-│   │   │               ├── config/
-│   │   │               │   ├── ApplicationConfig.java
-│   │   │               │   ├── JwtConfig.java
-│   │   │               │   └── StripeConfig.java
-│   │   │               ├── controller/
-│   │   │               │   ├── CartController.java
-│   │   │               │   ├── OrderController.java
-│   │   │               │   ├── PaymentController.java
-│   │   │               │   └── AdminOrderController.java
-│   │   │               ├── dto/
-│   │   │               │   ├── CartDto.java
-│   │   │               │   ├── CartItemDto.java
-│   │   │               │   ├── OrderDto.java
-│   │   │               │   ├── OrderItemDto.java
-│   │   │               │   └── PaymentRequestDto.java
-│   │   │               ├── exception/
-│   │   │               │   ├── GlobalExceptionHandler.java
-│   │   │               │   └── PaymentProcessingException.java
-│   │   │               ├── model/
-│   │   │               │   ├── Cart.java
-│   │   │               │   ├── CartItem.java
-│   │   │               │   ├── Order.java
-│   │   │               │   ├── OrderItem.java
-│   │   │               │   ├── Payment.java
-│   │   │               │   └── ShippingInfo.java
-│   │   │               ├── repository/
-│   │   │               │   ├── CartRepository.java
-│   │   │               │   ├── CartItemRepository.java
-│   │   │               │   ├── OrderRepository.java
-│   │   │               │   └── PaymentRepository.java
-│   │   │               ├── security/
-│   │   │               │   └── JwtAuthenticationFilter.java
-│   │   │               ├── service/
-│   │   │               │   ├── CartService.java
-│   │   │               │   ├── CartServiceImpl.java
-│   │   │               │   ├── OrderService.java
-│   │   │               │   ├── OrderServiceImpl.java
-│   │   │               │   ├── PaymentService.java
-│   │   │               │   └── PaymentServiceImpl.java
-│   │   │               └── client/
-│   │   │                   ├── ProductServiceClient.java
-│   │   │                   └── UserServiceClient.java
-│   │   └── resources/
-│   │       ├── application.properties
-│   │       └── db/
-│   │           └── migration/
-│   │               ├── V1__create_carts_table.sql
-│   │               ├── V2__create_orders_table.sql
-│   │               └── V3__create_payments_table.sql
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── specialty/
-│                   └── orderservice/
-│                       ├── controller/
-│                       │   └── OrderControllerTest.java
-│                       └── service/
-│                           └── OrderServiceTest.java
-└── pom.xml
-```
-
-### API Gateway and Discovery Service
-
-To complete the microservice architecture, I recommend adding:
-
-**API Gateway (Spring Cloud Gateway)**
-```
-api-gateway/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── specialty/
-│   │   │           └── apigateway/
-│   │   │               ├── ApiGatewayApplication.java
-│   │   │               ├── config/
-│   │   │               │   ├── RouteConfig.java
-│   │   │               │   └── CorsConfig.java
-│   │   │               └── filter/
-│   │   │                   ├── AuthenticationFilter.java
-│   │   │                   └── LoggingFilter.java
-│   │   └── resources/
-│   │       └── application.properties
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── specialty/
-│                   └── apigateway/
-│                       └── ApiGatewayApplicationTests.java
-└── pom.xml
-```
-
-**Service Registry (Eureka Server)**
-```
-service-registry/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── specialty/
-│   │   │           └── serviceregistry/
-│   │   │               └── ServiceRegistryApplication.java
-│   │   └── resources/
-│   │       └── application.properties
-│   └── test/
-└── pom.xml
-```
-
-## Key Configuration Files
+## Basic Configuration Files
 
 ### application.properties (User Service)
 
@@ -274,103 +75,242 @@ spring.application.name=user-service
 spring.datasource.url=jdbc:postgresql://localhost:5432/specialty_users
 spring.datasource.username=postgres
 spring.datasource.password=password
-spring.datasource.driver-class-name=org.postgresql.Driver
 
 # Hibernate properties
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 
 # JWT Configuration
-jwt.secret=YourJwtSecretKey
-jwt.expirationMs=86400000
-
-# Eureka Client
-eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
-eureka.instance.preferIpAddress=true
-
-# Flyway migration
-spring.flyway.enabled=true
-spring.flyway.locations=classpath:db/migration
+jwt.secret=specialty_marketplace_secret_key
+jwt.expiration=86400000
 ```
 
-### application.properties (Product Service)
+### application.properties (Product-Order Service)
 
 ```properties
 # Server configuration
 server.port=8082
-spring.application.name=product-service
+spring.application.name=product-order-service
 
 # PostgreSQL Configuration
-spring.datasource.url=jdbc:postgresql://localhost:5432/specialty_products
+spring.datasource.url=jdbc:postgresql://localhost:5432/specialty_products_orders
 spring.datasource.username=postgres
 spring.datasource.password=password
-spring.datasource.driver-class-name=org.postgresql.Driver
 
 # Hibernate properties
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 
 # JWT Configuration
-jwt.secret=YourJwtSecretKey
-
-# Eureka Client
-eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
-eureka.instance.preferIpAddress=true
-
-# Flyway migration
-spring.flyway.enabled=true
-spring.flyway.locations=classpath:db/migration
+jwt.secret=specialty_marketplace_secret_key
 ```
 
-### application.properties (Order Service)
+## Basic Implementation Samples
 
-```properties
-# Server configuration
-server.port=8083
-spring.application.name=order-service
+### User Service
 
-# PostgreSQL Configuration
-spring.datasource.url=jdbc:postgresql://localhost:5432/specialty_orders
-spring.datasource.username=postgres
-spring.datasource.password=password
-spring.datasource.driver-class-name=org.postgresql.Driver
+**User.java**
+```java
+package com.specialty.userservice.model;
 
-# Hibernate properties
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.hibernate.ddl-auto=validate
-spring.jpa.show-sql=true
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-# JWT Configuration
-jwt.secret=YourJwtSecretKey
-
-# Stripe API Key
-stripe.api.key=your_stripe_api_key
-stripe.webhook.secret=your_stripe_webhook_secret
-
-# Eureka Client
-eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
-eureka.instance.preferIpAddress=true
-
-# Feign Client
-feign.client.config.default.connectTimeout=5000
-feign.client.config.default.readTimeout=5000
-
-# Flyway migration
-spring.flyway.enabled=true
-spring.flyway.locations=classpath:db/migration
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false, unique = true)
+    private String username;
+    
+    @Column(nullable = false)
+    private String password;
+    
+    @Column(nullable = false, unique = true)
+    private String email;
+    
+    private String firstName;
+    private String lastName;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+    
+    // Getters and setters
+}
 ```
 
-## Next Steps
+**UserController.java**
+```java
+package com.specialty.userservice.controller;
 
-1. Set up a parent pom.xml for managing dependencies across services
-2. Implement the core entities and repositories first
-3. Create the service layer with business logic
-4. Implement controllers and API endpoints
-5. Set up inter-service communication using Feign clients
-6. Add security with JWT authentication
-7. Configure Docker for containerization
-8. Set up CI/CD pipeline
+import com.specialty.userservice.model.User;
+import com.specialty.userservice.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-Would you like me to provide the implementation details for any specific component, such as the User entity, JWT authentication, or database migration scripts?
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+    
+    @Autowired
+    private UserService userService;
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.findById(id));
+    }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+        return ResponseEntity.ok(userService.update(id, user));
+    }
+    
+    // Other endpoints
+}
+```
+
+### Product-Order Service
+
+**Product.java**
+```java
+package com.specialty.productorderservice.model;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+@Entity
+@Table(name = "products")
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false)
+    private String name;
+    
+    private String description;
+    
+    @Column(nullable = false)
+    private BigDecimal price;
+    
+    private int stockQuantity;
+    
+    private String imageUrl;
+    
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+    
+    // Getters and setters
+}
+```
+
+**Order.java**
+```java
+package com.specialty.productorderservice.model;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "orders")
+public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private Long userId;
+    
+    @Column(nullable = false)
+    private LocalDateTime orderDate;
+    
+    private String status;
+    
+    private BigDecimal totalAmount;
+    
+    private String shippingAddress;
+    
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> items = new ArrayList<>();
+    
+    // Getters and setters
+}
+```
+
+**ProductController.java**
+```java
+package com.specialty.productorderservice.controller;
+
+import com.specialty.productorderservice.model.Product;
+import com.specialty.productorderservice.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/products")
+public class ProductController {
+    
+    @Autowired
+    private ProductService productService;
+    
+    @GetMapping
+    public ResponseEntity<List<Product>> getAllProducts() {
+        return ResponseEntity.ok(productService.findAll());
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.findById(id));
+    }
+    
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Long categoryId) {
+        return ResponseEntity.ok(productService.findByCategory(categoryId));
+    }
+    
+    // Admin endpoints
+    @PostMapping
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        return ResponseEntity.ok(productService.save(product));
+    }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        return ResponseEntity.ok(productService.update(id, product));
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+        productService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+}
+```
+
+## Development Steps
+
+1. Start by creating the Spring Boot projects for each service
+2. Implement the entity classes (User, Product, Order)
+3. Create JPA repositories for database operations
+4. Implement basic service layer with CRUD operations
+5. Add JWT authentication for secure API access
+6. Develop controllers for handling HTTP requests
+7. Test the APIs with Postman or similar tool
+
+This simplified approach focuses on the core functionality while maintaining a clean separation of concerns. It's easier to set up and manage while still providing a solid foundation for your e-commerce application.
+
+Would you like me to provide implementation details for any specific component?
