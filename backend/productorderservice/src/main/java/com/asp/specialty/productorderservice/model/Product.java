@@ -1,5 +1,7 @@
 package com.asp.specialty.productorderservice.model;
 
+import com.asp.specialty.productorderservice.dto.CategoryDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -28,8 +30,9 @@ public class Product {
 
     private LocalDateTime updatedAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
     @PrePersist
@@ -114,5 +117,17 @@ public class Product {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    // In Product class
+    public CategoryDto getCategoryDto() {
+        if (this.category != null) {
+            return new CategoryDto(
+                    this.category.getId(),
+                    this.category.getName(),
+                    this.category.getDescription()
+            );
+        }
+        return null;
     }
 }

@@ -13,6 +13,7 @@
     --shadow-color: rgba(0, 0, 0, 0.05);
     --card-shadow: 0 15px 35px var(--shadow-color), 0 5px 15px var(--shadow-color);
     --transition-speed: 0.3s;
+    --background-dark: #324cdd;
   }
   
   .auth-form-container {

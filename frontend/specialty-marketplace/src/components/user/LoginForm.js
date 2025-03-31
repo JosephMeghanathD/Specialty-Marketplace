@@ -17,7 +17,7 @@ const LoginForm = () => {
 
     try {
       await authServiceInstance.login(username, password);
-      navigate('/profile');
+      navigate('/');
     } catch (error) {
       const resMessage =
         (error.response &&

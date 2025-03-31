@@ -28,4 +28,17 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT p FROM Product p WHERE p.price >= :minPrice AND p.price <= :maxPrice")
     List<Product> findByPriceRange(@Param("minPrice") double minPrice, @Param("maxPrice") double maxPrice);
+
+    @Query(value = """
+    SELECT * FROM (
+        SELECT p.*, 
+               ROW_NUMBER() OVER (PARTITION BY p.category_id ORDER BY p.stock_quantity DESC) AS rank 
+        FROM products p 
+        WHERE p.stock_quantity > 0
+    ) ranked 
+    WHERE ranked.rank <= 2
+""", nativeQuery = true)
+    List<Product> findFeaturedProducts();
+
+
 }

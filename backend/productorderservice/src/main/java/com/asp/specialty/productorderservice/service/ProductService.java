@@ -101,4 +101,8 @@ public class ProductService {
         Product product = findById(productId);
         return product.getStockQuantity() >= requestedQuantity;
     }
+
+    public List<Product> findFeaturedProducts() {
+        return productRepository.findFeaturedProducts();
+    }
 }

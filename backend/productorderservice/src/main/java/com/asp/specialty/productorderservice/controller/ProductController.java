@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequestMapping("/api/products")
 public class ProductController {
 
@@ -68,4 +69,9 @@ public class ProductController {
         productService.delete(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/featured")
+    public ResponseEntity<List<Product>> getFeaturedProducts() {
+        return ResponseEntity.ok(productService.findFeaturedProducts());
+    }
+
 }
