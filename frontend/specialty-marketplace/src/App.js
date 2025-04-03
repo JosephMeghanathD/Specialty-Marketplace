@@ -8,6 +8,7 @@ import './index.css';
 import './styles/auth.css';
 import './styles/auth-pages.css';
 import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -36,6 +37,14 @@ function App() {
                   <HomePage/>
                 </ProtectedRoute>
               } 
+            />
+            <Route
+              path="/account"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
             />
             {/* Add more routes as needed */}
           </Routes>

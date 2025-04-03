@@ -1,11 +1,13 @@
 package com.asp.specialty.userservice.security;
 
+import com.asp.specialty.userservice.service.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -50,13 +52,19 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetailsImpl userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
+        claims.put("roles", userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList());
+        claims.put("id", userDetails.getId());
+        return createToken(claims, userDetails.getUsername(), userDetails.getId());
     }
 
-    private String createToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs)).signWith(key(), SignatureAlgorithm.HS256).compact();
+    private String createToken(Map<String, Object> claims, String subject, Long id) {
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs)).signWith(key(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {

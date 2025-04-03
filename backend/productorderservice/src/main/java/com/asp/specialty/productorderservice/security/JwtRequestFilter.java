@@ -2,6 +2,7 @@ package com.asp.specialty.productorderservice.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -37,7 +38,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
             try {
-                claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(jwtToken).getBody();
+                JwtParser jwtParser = Jwts.parser().setSigningKey(secret);
+                claims = jwtParser.parseClaimsJws(jwtToken).getBody();
                 username = claims.getSubject();
             } catch (ExpiredJwtException e) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -51,10 +53,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         // Once we get the token validate it.
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (username != null && (SecurityContextHolder.getContext().getAuthentication() == null ||
+                SecurityContextHolder.getContext().getAuthentication().getName() == null ||
+                SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser"))) {
             // Extract roles from claims
             @SuppressWarnings("unchecked")
             List<String> roles = claims.get("roles", List.class);
+            Long id = claims.get("id", Long.class);
 
             // Convert roles to authorities
             List<SimpleGrantedAuthority> authorities = roles.stream()
@@ -63,7 +68,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             // Create authentication object
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                    username, null, authorities);
+                    username, id, authorities);
 
             // Set authentication in context
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

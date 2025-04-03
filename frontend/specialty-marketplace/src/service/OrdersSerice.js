@@ -5,7 +5,7 @@ import authServiceInstance from './authService';
 class OrderService {
   constructor() {
     this.api = axios.create({
-      baseURL: 'http://localhost:8082/api'
+      baseURL: 'http://localhost:8082/api/orders'
     });
     this.api.interceptors.request.use(
       (config) => {
@@ -137,4 +137,5 @@ class OrderService {
   }
 }
 
-export default new OrderService();
+const orderService = new OrderService();
+export default orderService;

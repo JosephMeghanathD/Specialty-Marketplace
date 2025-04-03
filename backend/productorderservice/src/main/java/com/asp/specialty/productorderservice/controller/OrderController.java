@@ -46,9 +46,10 @@ public class OrderController {
     }
 
     @GetMapping("/user")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<Order>> getCurrentUserOrders() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Long userId = Long.parseLong(auth.getName());
+        Long userId = (Long) auth.getCredentials();
         return ResponseEntity.ok(orderService.findByUserId(userId));
     }
 
