@@ -1,0 +1,69 @@
+{
+    "pageTitle": "About This Project | Specialty Marketplace",
+    "hero": {
+      "title": "Specialty Marketplace: ASP Final Project",
+      "tagline": "A full-stack e-commerce platform developed for the Advanced System Project course at the University of Central Missouri.",
+      "imageUrl": "https://picsum.photos/seed/ucm-asp-banner/1200/400"
+    },
+    "ourStory": {
+      "title": "Project Overview",
+      "paragraphs": [
+        "Welcome to the Specialty Marketplace showcase! This application was developed as the final project for the **Advanced System Project (ASP)** course at the **University of Central Missouri (UCM)**.",
+        "The primary goal of this project was to design, develop, and implement a comprehensive full-stack web application demonstrating key concepts learned throughout the course. It simulates a niche e-commerce platform, focusing on building robust backend services with Java Spring Boot and a modern, interactive frontend using React.",
+        "Key technical features implemented include user authentication (JWT), RESTful API design, product and category management, order processing simulation, and database integration (MySQL/PostgreSQL). While presented as an e-commerce site, the core focus was on the technical architecture and implementation process.",
+        "This project serves as a practical demonstration of integrating various technologies to create a functional and scalable web system."
+      ]
+    },
+    "ourValues": {
+      "title": "Project Focus Areas",
+      "items": [
+        {
+          "id": "v1",
+          "title": "Full-Stack Integration",
+          "description": "Integrating a React frontend with a Spring Boot backend via REST APIs.",
+          "icon": "FaLaptopCode"
+        },
+        {
+          "id": "v2",
+          "title": "Backend Development",
+          "description": "Building robust and secure APIs using Java Spring Boot, Spring Data JPA, and Spring Security.",
+          "icon": "FaCogs"
+        },
+        {
+          "id": "v3",
+          "title": "Frontend Development",
+          "description": "Creating a responsive and interactive user interface with React and modern CSS.",
+          "icon": "FaReact"
+        },
+        {
+          "id": "v4",
+          "title": "Database Management",
+          "description": "Designing relational database schemas and interacting with data using JPA.",
+          "icon": "FaDatabase"
+        },
+        {
+          "id": "v5",
+          "title": "Authentication & Security",
+          "description": "Implementing JWT-based user authentication and securing endpoints.",
+          "icon": "FaUserLock"
+        }
+      ]
+    },
+    "meetTheTeam": {
+      "title": "About the Developer",
+      "intro": "This project was developed by a student as part of the coursework requirements.",
+      "members": [
+        {
+          "id": "t1",
+          "name": "NAME***",
+          "title": "Student Developer (UCM ASP)",
+          "bio": "NAME*** designed and built this full-stack application for the Advanced System Project course, demonstrating skills in React, Spring Boot, database management, API integration, and system design.",
+          "imageUrl": "URL***",
+          "socialLinks": {
+            "linkedin": "#",
+            "github": "#"
+          }
+        }
+      ]
+    }
+  }

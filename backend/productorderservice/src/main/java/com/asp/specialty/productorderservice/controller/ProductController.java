@@ -74,4 +74,14 @@ public class ProductController {
         return ResponseEntity.ok(productService.findFeaturedProducts());
     }
 
+    @GetMapping("/popular")
+    public ResponseEntity<List<Product>> getPopularProducts() {
+        return ResponseEntity.ok(productService.findPopularProducts());
+    }
+
+    @GetMapping("/popular/{categoryId}")
+    public ResponseEntity<List<Product>> getPopularProducts(@PathVariable Long categoryId) {
+        System.out.println("Getting popular products for category ID: " + categoryId);
+        return ResponseEntity.ok(productService.findPopularProducts(categoryId));
+    }
 }

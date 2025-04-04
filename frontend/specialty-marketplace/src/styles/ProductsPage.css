@@ -1,0 +1,175 @@
+/* src/styles/ProductsPage.css */
+.products-page {
+    background-color: var(--background-color);
+  }
+  
+  .products-content-area {
+    max-width: 1600px; /* Wider max-width for this page */
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .products-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .products-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+  }
+  
+  .products-header p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+  }
+  
+  .products-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr; /* Fixed sidebar width, flexible content */
+    gap: 2rem;
+  }
+  
+  /* Sidebar placeholder - styling in ProductFilters.css */
+  .products-filters-sidebar {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    height: fit-content; /* Stick to top if needed */
+    position: sticky;
+    top: 80px; /* Adjust based on Navbar height + margin */
+  }
+  
+  .products-listing {
+    min-width: 0; /* Prevent flex/grid blowout */
+  }
+  
+  .listing-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 1rem;
+  }
+  
+  .product-count {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  
+  .sort-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .sort-container label {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+  
+  .sort-select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: white;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  
+  /* Mobile filter toggle */
+  .mobile-filter-toggle {
+      display: none; /* Hidden by default */
+      margin-bottom: 1.5rem;
+  }
+  
+  .mobile-filter-toggle button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--transition-speed) ease;
+  }
+  .mobile-filter-toggle button:hover {
+      background-color: var(--primary-dark);
+  }
+  
+  .close-filters-btn {
+      display: none; /* Hidden by default */
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+  }
+  
+  
+  /* Responsive */
+  @media (max-width: 992px) {
+    .products-layout {
+      grid-template-columns: 1fr; /* Stack layout */
+    }
+  
+    .mobile-filter-toggle {
+      display: block; /* Show toggle button */
+    }
+  
+    .products-filters-sidebar {
+      position: fixed; /* Make sidebar overlay */
+      top: 0;
+      left: 0;
+      width: 300px; /* Adjust width as needed */
+      height: 100vh;
+      background-color: white;
+      z-index: 1100;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      overflow-y: auto;
+      padding-top: 4rem; /* Space for close button */
+       box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    }
+  
+    .products-filters-sidebar.open {
+      transform: translateX(0);
+    }
+  
+    .close-filters-btn {
+      display: block; /* Show close button when sidebar is open */
+    }
+  
+    /* Optional: Add overlay behind sidebar when open */
+    /* .products-page::after { ... } */
+  }
+  
+  @media (max-width: 576px) {
+      .products-content-area {
+          padding: 1rem;
+      }
+       .products-header h1 {
+          font-size: 2rem;
+      }
+      .listing-controls {
+          flex-direction: column;
+          align-items: flex-start;
+      }
+       .products-filters-sidebar {
+          width: 280px;
+      }
+  }

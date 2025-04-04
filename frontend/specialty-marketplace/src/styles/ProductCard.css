@@ -1,0 +1,202 @@
+/* src/styles/ProductCard.css */
+
+.product-card-item {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden; /* Crucial for image zoom and badge positioning */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Needed for absolute positioned children like badge/overlay */
+    text-decoration: none; /* Remove underline if the whole card is linked */
+    color: inherit; /* Inherit text color */
+  }
+  
+  .product-card-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.09);
+  }
+  
+  /* Allows clicking anywhere on the card to navigate */
+  .product-link-wrapper {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1; /* Make link take full card height */
+  }
+  
+  
+  .product-image-container {
+    position: relative;
+    overflow: hidden; /* Keep zoom effect contained */
+    height: 220px; /* Or use aspect-ratio */
+    background-color: #f8f9fa; /* Placeholder bg */
+  }
+  
+  .product-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover ensures the image fills the container */
+    transition: transform 0.4s ease; /* Smooth zoom effect */
+  }
+  
+  .product-card-item:hover .product-image {
+    transform: scale(1.07); /* Zoom in slightly on hover */
+  }
+  
+  /* Badges (Discount, New, etc.) */
+  .product-badge {
+    position: absolute;
+    top: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    z-index: 2;
+  }
+  
+  .discount-badge {
+    left: 12px;
+    background-color: var(--danger-color); /* Use theme color */
+  }
+  
+  .new-badge { /* Example for a 'New' badge */
+    right: 12px;
+    background-color: var(--info-color);
+  }
+  
+  /* Hover Actions Overlay */
+  .product-actions-overlay {
+    position: absolute;
+    bottom: 10px; /* Position near the bottom */
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    opacity: 0; /* Hidden by default */
+    transform: translateY(10px); /* Start slightly down */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 3;
+  }
+  
+  .product-card-item:hover .product-actions-overlay {
+    opacity: 1; /* Show on hover */
+    transform: translateY(0); /* Move into position */
+  }
+  
+  .action-btn {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .action-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+  }
+  .action-btn:active {
+      transform: scale(1.0);
+  }
+  
+  /* Product Info Section */
+  .product-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows info section to fill remaining space */
+  }
+  
+  .product-category {
+      display: inline-block; /* Or block */
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+  }
+  
+  .product-name {
+    font-size: 1.05rem; /* Slightly larger name */
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 0.75rem 0; /* Reset margin */
+    line-height: 1.3;
+     /* Clamp text to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 2.6em; /* Ensure space for 2 lines */
+  }
+  
+  .product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Pushes meta to bottom if info grows */
+    padding-top: 0.5rem; /* Space above meta */
+     border-top: 1px solid var(--border-color); /* Subtle separator */
+  }
+  
+  .product-price {
+    display: flex;
+    align-items: baseline; /* Align prices neatly */
+    gap: 0.5rem;
+  }
+  
+  .current-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-dark); /* Slightly darker primary */
+  }
+  
+  .original-price {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+  
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+    color: #f8b400; /* Gold color for stars */
+  }
+  
+  .product-rating .star-icon {
+    font-size: 0.9em; /* Slightly smaller star */
+  }
+  
+  /* Optional: Separate Add to Cart button style */
+  .add-to-cart-button {
+      display: block;
+      width: calc(100% - 2rem); /* Match padding */
+      margin: 0 1rem 1rem;
+      padding: 0.6rem 1rem;
+      background-color: var(--primary-light);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s ease;
+  }
+  .add-to-cart-button:hover {
+      background-color: var(--primary-color);
+  }

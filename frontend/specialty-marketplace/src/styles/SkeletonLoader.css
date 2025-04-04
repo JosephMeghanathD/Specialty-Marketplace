@@ -1,0 +1,131 @@
+/* src/styles/SkeletonLoader.css */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+    border-radius: 4px;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  /* Product Card Skeleton */
+  .skeleton-product-card {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f8f8f8; /* Base color before gradient */
+    padding: 0; /* Remove padding from base skeleton */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Gap between skeleton elements */
+    padding-bottom: 1rem;
+  }
+  
+  .skeleton-image {
+    height: 200px;
+    width: 100%;
+    border-radius: 0; /* No radius for top image */
+  }
+  
+  .skeleton-text {
+    height: 1em;
+    width: 80%;
+    margin-left: 1rem; /* Match card padding */
+     margin-right: 1rem;
+  }
+  
+  .skeleton-title {
+    height: 1.2em;
+    width: 60%;
+    margin-top: 0.5rem;
+  }
+  
+  .skeleton-price {
+      width: 30%;
+      height: 1.1em;
+      margin-top: 0.25rem;
+  }
+  
+  .skeleton-button {
+      height: 36px; /* Match button height */
+      width: calc(100% - 2rem); /* Match link width */
+      margin-left: 1rem;
+      margin-right: 1rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+  }
+  
+  
+  /* Other skeleton types */
+  .skeleton-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .skeleton-category-card {
+    height: 320px; /* Match approx card height */
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f0f0f0; /* Use base color */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07); /* Match card shadow */
+
+}
+.skeleton-category-image {
+    height: 180px; /* Match image height */
+    width: 100%;
+}
+.skeleton-category-info {
+    padding: 1.25rem; /* Match card padding */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Space between skeleton lines */
+}
+.skeleton-category-info .skeleton-text {
+    height: 1em;
+    border-radius: 4px;
+}
+.skeleton-category-info .skeleton-title { width: 60%; height: 1.3em; }
+.skeleton-category-info .skeleton-desc { width: 90%; height: 1em; }
+.skeleton-category-info .skeleton-desc:last-of-type { width: 75%; } /* Make last line shorter */
+.skeleton-category-info .skeleton-link { width: 40%; height: 1em; margin-top: auto; align-self: flex-start;} /* Simulate link */
+
+/* Ensure animation is applied */
+.skeleton-category-card .skeleton {
+     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+     background-size: 200% 100%;
+     animation: skeleton-loading 1.5s infinite linear;
+}
+
+.skeleton-category-card-small {
+    height: 120px; /* Match card height */
+    border-radius: 8px;
+    background-color: #f0f0f0; /* Base color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+}
+
+.skeleton-category-card-small .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+    border-radius: 4px;
+}
+
+.skeleton-category-card-small .skeleton-icon { width: 30px; height: 30px; }
+.skeleton-category-card-small .skeleton-text { width: 70%; height: 1em; }

@@ -1,0 +1,241 @@
+/* src/styles/AboutUsPage.css */
+
+.about-us-page {
+    background-color: #f8f9fa; /* Light background */
+  }
+  
+  .about-us-content-area {
+    max-width: 1100px;
+    margin: 0 auto; /* Center content */
+    padding: 0 2rem 4rem; /* Padding top handled by hero */
+  }
+  
+  /* Hero Section */
+  .about-hero-section {
+    height: 40vh; /* Adjust height as needed */
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-bottom: 3rem;
+    padding: 2rem;
+  }
+  
+  .about-hero-section .hero-content {
+      background-color: rgba(0, 0, 0, 0.3); /* Dark overlay for text readability */
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 700px;
+  }
+  
+  .about-hero-section h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  .about-hero-section p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin: 0;
+  }
+  
+  /* General Content Section Styling */
+  .about-content-section {
+    background-color: #fff; /* White background for content sections */
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e9ecef;
+  }
+  
+  .about-content-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+  }
+  
+  /* Story Section */
+  .story-section p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  .story-section p:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Values Section */
+  .values-grid {
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .value-card {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #f8f9fa; /* Slightly off-white */
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+  }
+  
+  .value-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  
+  .value-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .value-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  /* Team Section */
+  .team-intro {
+      text-align: center;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  
+  .team-member-card {
+    background-color: white; /* Match section bg */
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+  }
+  .team-member-card:hover {
+       transform: translateY(-5px);
+       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .team-member-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem auto;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  .team-member-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 0.25rem 0;
+  }
+  
+  .team-member-title {
+    font-size: 0.95rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin: 0 0 1rem 0;
+  }
+  
+  .team-member-bio {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+  }
+  
+  .team-member-social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: auto; /* Push social links down if bio is short */
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .team-member-social a {
+    color: var(--text-muted);
+    font-size: 1.3rem;
+    transition: color 0.2s ease;
+  }
+  
+  .team-member-social a:hover {
+    color: var(--primary-color);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .about-hero-section h1 {
+      font-size: 2.2rem;
+    }
+    .about-hero-section p {
+      font-size: 1.1rem;
+    }
+    .about-content-section h2 {
+      font-size: 1.6rem;
+    }
+     .values-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+     }
+     .team-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+     }
+  }
+  
+  @media (max-width: 576px) {
+    .about-us-content-area {
+        padding: 0 1rem 3rem;
+    }
+    .about-hero-section {
+        min-height: 250px;
+        height: auto; /* Let content define height */
+        padding: 3rem 1rem;
+    }
+    .about-hero-section .hero-content {
+        padding: 1.5rem;
+    }
+    .about-hero-section h1 {
+      font-size: 1.8rem;
+    }
+    .about-hero-section p {
+      font-size: 1rem;
+    }
+    .about-content-section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+     .values-grid {
+          grid-template-columns: 1fr; /* Stack values */
+     }
+     .team-grid {
+          grid-template-columns: 1fr; /* Stack team members */
+     }
+  }

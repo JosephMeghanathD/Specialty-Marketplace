@@ -38,7 +38,7 @@ public class OrderController {
         boolean isAdmin = auth.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
 
-        if (!isAdmin && !auth.getName().equals(order.getUserId().toString())) {
+        if (!isAdmin && !auth.getCredentials().equals(order.getUserId())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
@@ -77,7 +77,7 @@ public class OrderController {
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
         // Set user ID from authenticated user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        order.setUserId(Long.parseLong(auth.getName()));
+        order.setUserId((Long) auth.getCredentials());
 
         try {
             Order createdOrder = orderService.createOrder(order);

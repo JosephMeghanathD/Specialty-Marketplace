@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import static java.lang.System.exit;
@@ -73,13 +74,47 @@ public class TestDataGenerator implements CommandLineRunner {
             if (i % 3 == 0) roles.add(roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow());
             if (i % 2 == 0) roles.add(roleRepository.findByName(ERole.ROLE_MODERATOR).orElseThrow());
 
-            String username = faker.name().username();
-            String email = faker.internet().emailAddress();
+            Random random = new Random();
+
             String firstName = faker.name().firstName();
             String lastName = faker.name().lastName();
 
+            int randomNum = random.nextInt(900) + 100;
+
+            String[] usernameFormats = getUsernameFormats(firstName, lastName, randomNum);
+            String username = usernameFormats[random.nextInt(usernameFormats.length)];
+
+            String[] emailFormats = getEmailFormats(firstName, lastName, random, randomNum);
+            String email = emailFormats[random.nextInt(emailFormats.length)];
+
+
             saveUser(username, email, firstName, lastName, roles);
         }
+    }
+
+    private static String[] getEmailFormats(String firstName, String lastName, Random random, int randomNum) {
+        // Common email domains
+        String[] emailDomains = {"gmail.com", "yahoo.com", "outlook.com", "icloud.com"};
+
+        // Possible email formats
+        String[] emailFormats = {
+                firstName.toLowerCase() + "." + lastName.toLowerCase() + "@" + emailDomains[random.nextInt(emailDomains.length)],
+                firstName.toLowerCase() + lastName.toLowerCase() + randomNum + "@" + emailDomains[random.nextInt(emailDomains.length)],
+                firstName.toLowerCase().charAt(0) + lastName.toLowerCase() + "@" + emailDomains[random.nextInt(emailDomains.length)],
+                firstName.toLowerCase() + "_" + lastName.toLowerCase() + "@" + emailDomains[random.nextInt(emailDomains.length)]
+        };
+        return emailFormats;
+    }
+
+    private static String[] getUsernameFormats(String firstName, String lastName, int randomNum) {
+        String[] usernameFormats = {
+                firstName.toLowerCase() + lastName.toLowerCase(),
+                firstName.toLowerCase() + "." + lastName.toLowerCase(),
+                firstName.toLowerCase().charAt(0) + lastName.toLowerCase(),
+                firstName.toLowerCase() + "_" + lastName.toLowerCase(),
+                firstName.toLowerCase() + lastName.toLowerCase() + randomNum
+        };
+        return usernameFormats;
     }
 
     private void saveUser(String username, String email, String firstName, String lastName, Set<Role> roles) {

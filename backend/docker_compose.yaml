@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres:
+    build: .
+    image: postgres
+    container_name: postgresdb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: specialty_marketplace
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    networks:
+      - library-network
+
+networks:
+  library-network:
+    driver: bridge

@@ -1,12 +1,14 @@
 import axios from 'axios';
 import authServiceInstance from './authService';
 
+const API_BASE_URL = 'http://localhost:8082/api/orders'; // Base URL for order operations
 
 class OrderService {
   constructor() {
     this.api = axios.create({
-      baseURL: 'http://localhost:8082/api/orders'
+      baseURL: API_BASE_URL
     });
+
     this.api.interceptors.request.use(
       (config) => {
         const token = authServiceInstance.getToken();
@@ -21,121 +23,71 @@ class OrderService {
     );
   }
 
-  
-
-  // Get current user orders
-  async getCurrentUserOrders() {
-    try {
-      const response = await this.api.get('/user');
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching current user orders:', error);
-      throw error;
-    }
-  }
-
-  // Get order by ID
-  async getOrderById(orderId) {
-    try {
-      const response = await this.api.get(`/${orderId}`);
-      return response.data;
-    } catch (error) {
-      console.error(`Error fetching order ${orderId}:`, error);
-      throw error;
-    }
-  }
-
-  // Create new order
   async createOrder(orderData) {
     try {
       const response = await this.api.post('', orderData);
       return response.data;
     } catch (error) {
-      console.error('Error creating order:', error);
+      console.error('Error creating order:', error.response?.data || error.message);
       throw error;
     }
   }
 
-  // Cancel order
-  async cancelOrder(orderId) {
+  async getCurrentUserOrders() {
     try {
-      await this.api.post(`/${orderId}/cancel`);
-      return true;
-    } catch (error) {
-      console.error(`Error cancelling order ${orderId}:`, error);
-      throw error;
-    }
-  }
-
-  // Get recent orders for current user
-  async getRecentOrders() {
-    try {
-      // We need to get the userId from the authenticated user
-      // For now, we'll just use the '/user' endpoint to get orders
+      // Assuming backend has an endpoint like /user or similar tied to authenticated user
+      // Adjust endpoint if necessary based on your backend implementation
       const response = await this.api.get('/user');
       return response.data;
     } catch (error) {
-      console.error('Error fetching recent orders:', error);
+      console.error('Error fetching current user orders:', error.response?.data || error.message);
       throw error;
     }
   }
 
-  // For admin functions
-  // Get all orders (admin only)
+  async getOrderById(orderId) {
+    try {
+      const response = await this.api.get(`/${orderId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching order ${orderId}:`, error.response?.data || error.message);
+      throw error;
+    }
+  }
+
+  async cancelOrder(orderId) {
+    try {
+      const response = await this.api.post(`/${orderId}/cancel`); // Assuming POST for cancellation
+      return response.data; // Or return true/status code based on backend
+    } catch (error) {
+      console.error(`Error cancelling order ${orderId}:`, error.response?.data || error.message);
+      throw error;
+    }
+  }
+
+  // --- Admin specific methods (example) ---
+
   async getAllOrders() {
     try {
       const response = await this.api.get('');
       return response.data;
     } catch (error) {
-      console.error('Error fetching all orders:', error);
+      console.error('Error fetching all orders:', error.response?.data || error.message);
       throw error;
     }
   }
 
-  // Get orders by status (admin only)
-  async getOrdersByStatus(status) {
-    try {
-      const response = await this.api.get(`/status/${status}`);
-      return response.data;
-    } catch (error) {
-      console.error(`Error fetching orders with status ${status}:`, error);
-      throw error;
-    }
-  }
-
-  // Update order status (admin only)
   async updateOrderStatus(orderId, status) {
     try {
       const response = await this.api.put(`/${orderId}/status`, { status });
       return response.data;
     } catch (error) {
-      console.error(`Error updating status for order ${orderId}:`, error);
+      console.error(`Error updating status for order ${orderId}:`, error.response?.data || error.message);
       throw error;
     }
   }
 
-  // Update tracking info (admin only)
-  async updateTrackingInfo(orderId, trackingNumber) {
-    try {
-      const response = await this.api.put(`/${orderId}/tracking`, { trackingNumber });
-      return response.data;
-    } catch (error) {
-      console.error(`Error updating tracking for order ${orderId}:`, error);
-      throw error;
-    }
-  }
-
-  // Get order status counts (admin only)
-  async getOrderStatusCounts() {
-    try {
-      const response = await this.api.get('/stats/status-count');
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching order status counts:', error);
-      throw error;
-    }
-  }
 }
 
-const orderService = new OrderService();
-export default orderService;
+const orderServiceInstance = new OrderService();
+export default orderServiceInstance;

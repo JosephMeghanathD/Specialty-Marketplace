@@ -1,0 +1,291 @@
+/* src/styles/CartPage.css */
+
+.cart-page {
+    background-color: #f8f9fa; /* Light background */
+    min-height: calc(100vh - 150px); /* Adjust based on nav/footer */
+  }
+  
+  .cart-content-area {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+  }
+  
+  /* Cart Header */
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .cart-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  
+  .clear-cart-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .clear-cart-button:hover {
+    background-color: var(--danger-color);
+    color: white;
+  }
+  .clear-cart-button svg {
+      margin-right: 0.2rem;
+  }
+  
+  /* Empty Cart Message */
+  .cart-empty-message {
+    background-color: white;
+    border-radius: 8px;
+    padding: 4rem 2rem;
+    text-align: center;
+    margin-top: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-color);
+  }
+  
+  .cart-empty-message svg {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+  
+  .cart-empty-message p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+  
+  .browse-products-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.8rem;
+    border-radius: 5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .browse-products-link:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  /* Cart Layout (Items + Summary) */
+  .cart-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Items take more space */
+    gap: 2rem;
+    align-items: flex-start; /* Align tops */
+  }
+  
+  /* Cart Items List Section */
+  .cart-items-list {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+     border: 1px solid #e9ecef;
+  }
+  
+  .cart-items-list h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--border-color);
+  }
+  
+  .cart-items-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Space between CartItem components */
+  }
+  
+  /* Cart Summary Section */
+  .cart-summary {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e9ecef;
+    position: sticky; /* Make summary sticky */
+    top: 90px; /* Adjust based on Navbar height + margin */
+  }
+  
+  .cart-summary h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+  }
+  
+  .summary-details {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; /* Space between summary rows */
+  }
+  
+  .summary-row,
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    color: var(--text-muted);
+  }
+  
+  .summary-row span:last-child,
+  .summary-total span:last-child {
+    font-weight: 500;
+    color: var(--text-color);
+  }
+  
+  .summary-total {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .summary-total span:last-child {
+    font-size: 1.2rem;
+    color: var(--primary-dark);
+  }
+  
+  /* Checkout Button */
+  .checkout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    background-color: var(--success-color); /* Use success color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(45, 206, 137, 0.2); /* Success color shadow */
+  }
+  
+  .checkout-button:hover:not(:disabled) {
+    background-color: #25a770; /* Darker success */
+    box-shadow: 0 6px 12px rgba(45, 206, 137, 0.3);
+  }
+  
+  .checkout-button:disabled {
+    background-color: #adb5bd;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+  }
+  
+  .checkout-button .spinner-icon {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Checkout Error Message */
+  .checkout-error-message {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0 0.5rem; /* Display below summary, above button */
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+  }
+  
+  .checkout-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 1rem;
+      line-height: 1.4;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .cart-layout {
+      grid-template-columns: 1fr; /* Stack layout */
+    }
+    .cart-summary {
+      position: static; /* Remove sticky behavior when stacked */
+      margin-top: 2rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .cart-content-area {
+      padding: 1rem;
+    }
+    .cart-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .cart-header h1 {
+      font-size: 1.6rem;
+    }
+    .cart-items-list {
+      padding: 1rem 1.2rem;
+    }
+    .cart-summary {
+      padding: 1.5rem;
+    }
+    .cart-summary h2 {
+      font-size: 1.3rem;
+    }
+    .checkout-button {
+        font-size: 1rem;
+        padding: 0.8rem 1.2rem;
+    }
+  }
+  
+  /* --- Ensure CartItem styles are defined in CartItem.css --- */
+  /* Example placeholder if needed */
+  /* .cart-item-card { ... } */

@@ -1,0 +1,400 @@
+/* src/styles/OrderDetailPage.css */
+
+.order-detail-page {
+    background-color: #f9fafb; /* Light background */
+  }
+  
+  .order-detail-content-area {
+    max-width: 1100px; /* Max width for content */
+    margin: 2rem auto;
+    padding: 2rem;
+  }
+  
+  /* Header */
+  .order-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 1rem; /* Space between elements if they wrap */
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .order-detail-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+  }
+  
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    white-space: nowrap; /* Prevent breaking */
+  }
+  .back-link:hover {
+    color: var(--primary-dark);
+  }
+  
+  /* Loading / Error / Not Found States */
+  .order-detail-message {
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      color: var(--text-muted);
+      margin-top: 2rem;
+  }
+  .order-detail-message p {
+      font-size: 1.1rem;
+      margin: 0.5rem 0 1.5rem 0;
+  }
+  .order-detail-message svg,
+  .order-detail-message .spinner-icon { /* Target spinner specifically */
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  .order-detail-message.loading svg {
+      color: var(--primary-color);
+  }
+  .order-detail-message.error svg {
+      color: var(--danger-color);
+  }
+  .order-detail-message.not-found svg {
+       color: var(--info-color);
+  }
+  .order-detail-message.error p {
+      color: var(--danger-color);
+  }
+  .order-detail-message .spinner-icon {
+    animation: spin 1.5s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .order-detail-message .back-link {
+      font-size: 1rem; /* Adjust link size in message box */
+  }
+  
+  
+  /* Order Summary Card */
+  .order-summary-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    border: 1px solid #e9ecef;
+  }
+  
+  /* Wrapper for title and cancel button */
+  .summary-header-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed var(--border-color);
+  }
+  
+  .summary-header-actions h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      border: none;
+  }
+  
+  /* Cancel Button Styling */
+  .cancel-order-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    background-color: var(--danger-color); /* Red for cancel */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+  }
+  
+  .cancel-order-button:hover:not(:disabled) {
+    background-color: #c82333; /* Darker red */
+  }
+  
+  .cancel-order-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+  
+  .cancel-order-button .spinner-icon {
+      animation: spin 1s linear infinite;
+      font-size: 1em; /* Match text size */
+  }
+  
+  /* Cancellation Error Message Styling */
+  .cancellation-error-message {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      /* Display below header, above grid */
+      margin: -0.5rem 0 1.5rem 0;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+  }
+  
+  /* Summary Grid Layout */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+    gap: 1.5rem 2rem; /* Row and column gap */
+  }
+  
+  .summary-item {
+    display: flex;
+    align-items: flex-start; /* Align icon top */
+    gap: 0.8rem;
+  }
+  .summary-item.full-width {
+    grid-column: 1 / -1; /* Make address span full width */
+  }
+  
+  .summary-icon {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-top: 0.1em; /* Align icon slightly better with text */
+    flex-shrink: 0; /* Prevent icon shrinking */
+  }
+  
+  .summary-item div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .summary-item strong {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+  }
+  
+  .summary-item span {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+    word-break: break-word; /* Wrap long addresses/tracking */
+  }
+  
+  /* Status Badge specific styling */
+  .order-status-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block; /* Ensure padding applies correctly */
+    margin-top: 0.1rem; /* Small spacing */
+  }
+  
+  /* Match status colors */
+  .order-status-badge.pending { background-color: #fff3cd; color: #856404; }
+  .order-status-badge.processing { background-color: #d1ecf1; color: #0c5460; }
+  .order-status-badge.shipped { background-color: #cce5ff; color: #004085; }
+  .order-status-badge.delivered { background-color: #d4edda; color: #155724; }
+  .order-status-badge.cancelled { background-color: #f8d7da; color: #721c24; }
+  .order-status-badge.unknown { background-color: #e2e3e5; color: #383d41; }
+  
+  
+  /* Order Items Section */
+  .order-items-section {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    padding: 2rem;
+    border: 1px solid #e9ecef;
+  }
+  
+  .order-items-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--border-color);
+  }
+  
+  .order-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .order-item-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+  }
+  .order-item-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .item-image-container {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+  }
+  
+  .item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .item-details {
+    flex-grow: 1; /* Take up available space */
+    min-width: 150px; /* Prevent being too squished */
+  }
+  
+  .item-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-color);
+    text-decoration: none;
+    display: block; /* Ensure it takes block space */
+    margin-bottom: 0.2rem;
+  }
+  .item-name:hover {
+      color: var(--primary-color);
+  }
+  
+  .item-id {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 0;
+  }
+  
+  .item-pricing,
+  .item-quantity,
+  .item-subtotal {
+    flex-shrink: 0;
+    text-align: right;
+    min-width: 100px; /* Give columns minimum width */
+  }
+  
+  .item-pricing p,
+  .item-quantity p,
+  .item-subtotal p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .item-subtotal strong {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-color);
+      display: block; /* Place below label */
+      margin-top: 0.1rem;
+  }
+  .item-price-each {
+      font-weight: 500;
+  }
+  
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+      .order-detail-content-area {
+          padding: 1.5rem;
+      }
+      .order-detail-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+      }
+      .order-detail-header h1 {
+          font-size: 1.8rem;
+      }
+      .summary-grid {
+           grid-template-columns: 1fr; /* Stack items in 1 column */
+           gap: 1.2rem;
+      }
+
+      .order-item-card {
+          gap: 0.8rem; /* Reduce gap */
+      }
+       .item-image-container {
+          width: 60px;
+          height: 60px;
+      }
+      .item-details {
+          flex-basis: calc(100% - 70px); /* Take remaining width beside image */
+          min-width: 0; /* Override min-width */
+      }
+      .item-pricing,
+      .item-quantity,
+      .item-subtotal {
+          flex-basis: 30%; /* Roughly third width below details */
+          text-align: left; /* Align left on mobile */
+          min-width: 80px;
+          padding-top: 0.5rem; /* Add space when wrapping */
+      }
+      .item-subtotal {
+          text-align: right; /* Keep subtotal right-aligned */
+          flex-basis: 35%; /* Slightly more space */
+      }
+  }
+  
+  @media (max-width: 576px) {
+       .order-detail-content-area { padding: 1rem; }
+       .order-detail-header h1 { font-size: 1.6rem; }
+       .order-summary-card, .order-items-section { padding: 1.5rem; }
+       .summary-item strong, .summary-item span { font-size: 0.9rem; }
+       .order-status-badge { font-size: 0.75rem; padding: 0.25rem 0.6rem; }
+  
+        /* Stack summary header/actions on mobile */
+       .summary-header-actions {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.8rem;
+      }
+      .cancel-order-button {
+          width: 100%;
+          justify-content: center;
+      }
+  
+       .item-name { font-size: 0.95rem; }
+       .item-pricing, .item-quantity, .item-subtotal { font-size: 0.85rem; }
+       .item-subtotal strong { font-size: 0.9rem; }
+  }

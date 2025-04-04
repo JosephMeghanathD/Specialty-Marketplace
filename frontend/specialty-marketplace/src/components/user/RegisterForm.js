@@ -1,4 +1,3 @@
-// src/components/user/RegisterForm.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaUserPlus, FaUserCircle } from 'react-icons/fa';

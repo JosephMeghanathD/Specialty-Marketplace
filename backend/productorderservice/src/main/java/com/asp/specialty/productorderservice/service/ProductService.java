@@ -105,4 +105,12 @@ public class ProductService {
     public List<Product> findFeaturedProducts() {
         return productRepository.findFeaturedProducts();
     }
+
+    public List<Product> findPopularProducts() {
+        return productRepository.findTop10PopularProducts();
+    }
+
+    public List<Product> findPopularProducts(long categoryId) {
+        return productRepository.findTop10PopularProducts(categoryId);
+    }
 }

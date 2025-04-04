@@ -36,9 +36,22 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
         FROM products p 
         WHERE p.stock_quantity > 0
     ) ranked 
-    WHERE ranked.rank <= 2
+    WHERE ranked.rank <= 2 LIMIT 5
 """, nativeQuery = true)
     List<Product> findFeaturedProducts();
+
+    @Query("SELECT p FROM Product p " +
+            "JOIN OrderItem oi ON p.id = oi.productId " +
+            "GROUP BY p.id, p.name " +
+            "ORDER BY COUNT(oi.id) DESC LIMIT 5")
+    List<Product> findTop10PopularProducts();
+
+    @Query("SELECT p FROM Product p " +
+            "JOIN OrderItem oi ON p.id = oi.productId " +
+            "WHERE p.category.id = :categoryId " +
+            "GROUP BY p.id " +
+            "ORDER BY COUNT(oi) DESC LIMIT 5")
+    List<Product> findTop10PopularProducts(@Param("categoryId") Long categoryId);
 
 
 }

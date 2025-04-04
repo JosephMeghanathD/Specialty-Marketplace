@@ -41,7 +41,7 @@ const Footer = () => {
             <h3 className="footer-heading">Customer Service</h3>
             <ul className="footer-links">
               <li><Link to="/account">My Account</Link></li>
-              <li><Link to="/orders">Order Tracking</Link></li>
+              <li><Link to="/account">Order Tracking</Link></li>
               <li><Link to="/wishlist">Wishlist</Link></li>
               <li><Link to="/shipping">Shipping Policy</Link></li>
               <li><Link to="/returns">Returns & Exchanges</Link></li>
