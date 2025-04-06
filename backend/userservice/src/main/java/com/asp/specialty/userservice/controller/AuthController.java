@@ -56,7 +56,8 @@ public class AuthController {
         String jwt = jwtUtil.generateToken(userDetails);
         List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), userDetails.getFirstName(), userDetails.getLastName(), roles));
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),
+                userDetails.getEmail(), userDetails.getFirstName(), userDetails.getLastName(), roles, jwtUtil.getJwtExpirationMs()));
     }
 
     @PostMapping("/signup")

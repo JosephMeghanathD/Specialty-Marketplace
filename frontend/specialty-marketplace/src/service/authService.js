@@ -12,6 +12,7 @@ class authService {
       
       if (response.data.accessToken) {
         localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('userLoggedInAt', Date.now())
       }
       
       return response.data;
@@ -44,14 +45,26 @@ class authService {
     return user;
   }
 
+  removeUser() {
+    localStorage.removeItem("user");
+  }
+
   isLoggedIn() {
     const user = this.getCurrentUser();
     return !!user;
   }
 
+  getLogginAt() {
+    return localStorage.getItem("userLoggedInAt");
+  }
+
   getToken() {
     const user = this.getCurrentUser();
-    return user?.accessToken;
+    const tokenTTL = this.getCurrentUser()?.tokenTTL;
+    if (tokenTTL >=  (Date.now() - this.getLogginAt())) {
+      return user?.accessToken;
+    }
+    this.removeUser();
   }
 
   hasRole(role) {

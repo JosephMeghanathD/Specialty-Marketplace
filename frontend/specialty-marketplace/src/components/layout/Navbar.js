@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaShoppingCart, FaUser, FaBars, FaTimes } from 'react-icons/fa';
 import { useCart } from '../../context/CartContext';
 import '../../styles/Navbar.css';
@@ -8,6 +8,9 @@ const Navbar = () => {
     const { itemCount } = useCart();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
+
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
     const toggleSearch = () => {
@@ -24,6 +27,12 @@ const Navbar = () => {
         setIsMenuOpen(false);
         setIsSearchOpen(false);
     }
+
+    const handleSearchSubmit = () => {
+      if (!searchQuery.trim()) return;
+      // Navigate to products page with search query
+      navigate(`/products?search=${encodeURIComponent(searchQuery)}`);
+    };
 
     return (
         <nav className="navbar">
@@ -60,11 +69,13 @@ const Navbar = () => {
                 {/* --- Desktop Right Side Actions --- */}
                 <div className={`navbar-right ${isMenuOpen ? 'active' : ''}`}>
                     <div className={`search-container`}>
-                        <input type="text" placeholder="Search products..." className="search-input" />
-                        <button className="search-button" aria-label="Search"><FaSearch /></button>
+                       <form className={`search-container`} onSubmit={handleSearchSubmit}>
+                        <input type="text" placeholder="Search products..." className="search-input" onChange={(e) => setSearchQuery(e.target.value)}/>
+                        <button className="search-button" aria-label="Search" type="submit"><FaSearch /></button>
+                       </form>
                     </div>
                     <div className="navbar-buttons">
-                        <Link to="/profile" className="desktop-icon-btn user-icon" onClick={closeMobileMenu} aria-label="My Profile"><FaUser /></Link>
+                        <Link to="/account" className="desktop-icon-btn user-icon" onClick={closeMobileMenu} aria-label="My Profile"><FaUser /></Link>
                         <Link to="/cart" className="desktop-icon-btn cart-icon" onClick={closeMobileMenu} aria-label="Shopping Cart">
                             <FaShoppingCart />
                             {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}

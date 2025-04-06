@@ -53,6 +53,7 @@ const HomePageComponent = () => {
             // Handle potential diff backend structures for category {id, name} vs categoryId
             category: product.categoryDto || product.category,
             discount: discount,
+            stockQuantity:product.stockQuantity,
         };
     };
 
