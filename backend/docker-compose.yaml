@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  user-service:
+    build:
+      context: ./userservice
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8081:8081"
+    networks:
+      - specialty-network
+  product-service:
+    build:
+      context: ./productorderservice
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8082:8082"
+    networks:
+      - specialty-network
+
+  postgres:
+    build: .
+    image: postgres
+    container_name: postgresdb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: specialty_marketplace
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    networks:
+      - specialty-network
+
+networks:
+  specialty-network:
+    driver: bridge
