@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaUser, FaLock, FaSignInAlt } from 'react-icons/fa';
-import authServiceInstance from '../../service/authService';
+import React, { useState } from "react";
+import { FaUser, FaLock, FaSignInAlt } from "react-icons/fa";
+import authServiceInstance from "../../service/authService";
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+  const [message, setMessage] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setMessage('');
+    setMessage("");
     setLoading(true);
 
     try {
       await authServiceInstance.login(username, password);
-      navigate('/');
+      window.location.reload();
     } catch (error) {
       const resMessage =
         (error.response &&
@@ -37,7 +35,7 @@ const LoginForm = () => {
         <h2>Welcome Back</h2>
         <p>Sign in to continue to your account</p>
       </div>
-      
+
       <form onSubmit={handleLogin} className="auth-form">
         <div className="form-group">
           <div className="input-icon-wrapper">
@@ -72,7 +70,9 @@ const LoginForm = () => {
             <input type="checkbox" id="remember" />
             <label htmlFor="remember">Remember me</label>
           </div>
-          <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
+          <a href="/forgot-password" className="forgot-password">
+            Forgot Password?
+          </a>
         </div>
 
         <div className="form-group">
@@ -90,12 +90,10 @@ const LoginForm = () => {
 
         {message && (
           <div className="form-group">
-            <div className="auth-alert alert-danger">
-              {message}
-            </div>
+            <div className="auth-alert alert-danger">{message}</div>
           </div>
         )}
-        
+
         <div className="auth-redirect">
           <p>
             New to our platform? <a href="/register">Create an account</a>
@@ -103,10 +101,16 @@ const LoginForm = () => {
         </div>
 
         <div className="social-login">
-          <p className="social-divider"><span>Or sign in with</span></p>
+          <p className="social-divider">
+            <span>Or sign in with</span>
+          </p>
           <div className="social-buttons">
-            <button type="button" className="social-button google">Google</button>
-            <button type="button" className="social-button facebook">Facebook</button>
+            <button type="button" className="social-button google">
+              Google
+            </button>
+            <button type="button" className="social-button facebook">
+              Facebook
+            </button>
           </div>
         </div>
       </form>

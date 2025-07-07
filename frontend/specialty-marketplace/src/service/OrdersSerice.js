@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authServiceInstance from './authService';
 
-const API_BASE_URL = 'http://localhost:8082/api/orders'; // Base URL for order operations
+const API_BASE_URL = 'https://product-service-826904415366.us-central1.run.app/api/orders'; // Base URL for order operations
 
 class OrderService {
   constructor() {

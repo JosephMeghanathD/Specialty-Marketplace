@@ -4,7 +4,7 @@ import authServiceInstance from './authService'; // Assuming this handles token 
 class ProductService {
     constructor() {
         this.api = axios.create({
-            baseURL: 'http://localhost:8082/api' // Ensure your product/order service URL
+            baseURL: 'https://product-service-826904415366.us-central1.run.app/api' // Ensure your product/order service URL
         });
 
         // Request interceptor to add JWT token
