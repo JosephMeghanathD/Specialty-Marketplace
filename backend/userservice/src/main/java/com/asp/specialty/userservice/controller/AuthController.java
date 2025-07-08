@@ -104,4 +104,10 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
+    // health check
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "OK";
+    }
 }
