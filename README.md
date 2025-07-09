@@ -2,6 +2,12 @@
 
 A modular, full-stack e-commerce platform designed using Spring Boot (Java) for backend microservices and React with Tailwind CSS for the frontend.
 
+[![React](https://img.shields.io/badge/React-18.2.0-%2361DAFB?logo=react)](https://reactjs.org/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1.5-%236DB33F?logo=spring)](https://spring.io/projects/spring-boot)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16.0-%23316192?logo=postgresql)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-24.0.7-%232496ED?logo=docker)](https://www.docker.com/)
+[![JWT](https://img.shields.io/badge/JWT-Auth-%23000000?logo=jsonwebtokens)](https://jwt.io/)
+
 ---
 [![Netlify Status](https://api.netlify.com/api/v1/badges/07330990-2978-4619-9ada-133ee40fb75a/deploy-status)](https://app.netlify.com/projects/specalitymarketplace/deploys)
 
