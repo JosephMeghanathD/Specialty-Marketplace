@@ -16,6 +16,9 @@ if [ -z "$PROJECT_ID" ] || [ -z "$REGION" ]; then
   echo "Error: Please set the PROJECT_ID and REGION environment variables first."
   exit 1
 fi
+gcloud auth application-default set-quota-project $PROJECT_ID
+
+ gcloud config set project $PROJECT_ID
 
 # --- Argument Parsing ---
 SERVICES_TO_DEPLOY=("user-service" "product-service")

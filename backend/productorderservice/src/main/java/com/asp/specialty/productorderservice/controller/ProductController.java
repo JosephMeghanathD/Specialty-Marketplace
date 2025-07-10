@@ -84,4 +84,9 @@ public class ProductController {
         System.out.println("Getting popular products for category ID: " + categoryId);
         return ResponseEntity.ok(productService.findPopularProducts(categoryId));
     }
+
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "OK";
+    }
 }
